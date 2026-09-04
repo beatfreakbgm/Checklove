@@ -1,1 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Check Your Love ❤️</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#2196f3,#00bcd4);
+    font-family:Arial,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:430px;
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+h1,h2{
+    text-align:center;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:12px;
+    margin:7px 0 14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    margin-top:8px;
+    border:0;
+    border-radius:10px;
+    background:#2196f3;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+}
+
+button:disabled{
+    background:#999;
+}
+
+.checkbox{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    margin:10px 0 5px;
+}
+
+.checkbox input{
+    width:auto;
+    margin-top:4px;
+}
+
+.important-note{
+    margin:8px 0 15px;
+    padding:10px;
+    background:#f5f5f5;
+    border-radius:8px;
+    font-size:12px;
+    line-height:1.5;
+    color:#555;
+}
+
+.important-note strong{
+    color:#222;
+}
+
+.option{
+    padding:15px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#eef8ff;
+}
+
+.result{
+    text-align:center;
+}
+
+.inputBox{
+    position:relative;
+}
+
+.inputBox input{
+    padding-right:45px;
+}
+
+.eye{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    font-size:21px;
+    user-select:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<!-- ================= PAGE 1 ================= -->
+
+<div class="page active" id="page1">
+
+<h1>CHECK YOUR LOVE ❤️</h1>
+
+<p style="text-align:center;">
+Check your love percentage with both couple names.
+</p>
+
+<button onclick="showPage(2)">
+CHECK 💕
+</button>
+
+</div>
+
+
+<!-- ================= PAGE 2 ================= -->
+
+<div class="page" id="page2">
+
+<h2>PLEASE FILL YOUR DETAILS ❤️</h2>
+
+<label>Name</label>
+<input
+    type="text"
+    id="name"
+    placeholder="Enter your name"
+>
+
+<label>Lover Name</label>
+
+<div class="inputBox">
+<input
+    type="password"
+    id="loverName"
+    placeholder="Enter lover name"
+>
+<span class="eye" onclick="togglePassword('loverName','eye1')" id="eye1">👁️</span>
+</div>
+
+<label>Instagram ID</label>
+
+<div class="inputBox">
+<input
+    type="password"
+    id="instagram"
+    placeholder="Enter Instagram ID"
+>
+<span class="eye" onclick="togglePassword('instagram','eye2')" id="eye2">👁️</span>
+</div>
+
+<label>State</label>
+
+<select id="state" onchange="loadDistricts()">
+    <option value="">Select State</option>
+</select>
+
+<label>District</label>
+
+<select id="district" onchange="loadTaluks()">
+    <option value="">Select District</option>
+</select>
+
+<label>Taluk</label>
+
+<select id="taluk">
+    <option value="">Select Taluk</option>
+</select>
+
+<label>Other Details</label>
+
+<textarea
+    id="otherDetails"
+    placeholder="Enter other details"
+></textarea>
+
+<div class="checkbox">
+
+<input type="checkbox" id="consent">
+
+<label for="consent">
+I am very excited to see my love percentage I agree😊.
+</label>
+
+</div>
+
+<div class="important-note">
+
+<strong>IMPORTANT NOTE:</strong><br>
+
+This page is created for entertainment purposes only.
+Submitted details will be stored for calculation.
+
+</div>
+
+<button
+    id="page2Next"
+    onclick="sendPage2()"
+>
+CONTINUE
+</button>
+
+</div>
+
+
+<!-- ================= PAGE 3 ================= -->
+
+<div class="page" id="page3">
+
+<h2>LOVER RELATED DETAILS ❤️</h2>
+
+<label>Lover Name</label>
+
+<div class="inputBox">
+<input
+    type="password"
+    id="loverName3"
+    readonly
+>
+<span class="eye" onclick="togglePassword('loverName3','eye3')" id="eye3">👁️</span>
+</div>
+
+<label>
+How many years have you loved them?
+</label>
+
+<select id="loveYears">
+
+<option value="">Select Years</option>
+<option value="1 Year">1 Year</option>
+<option value="2 Years">2 Years</option>
+<option value="3 Years">3 Years</option>
+<option value="4 Years">4 Years</option>
+<option value="5 Years">5 Years</option>
+<option value="6 Years">6 Years</option>
+<option value="7 Years">7 Years</option>
+<option value="8 Years">8 Years</option>
+<option value="9 Years">9 Years</option>
+<option value="10 Years">10 Years</option>
+
+</select>
+
+<label>
+The city of the one you love?
+</label>
+
+<input
+    type="text"
+    id="loveCity"
+    placeholder="Enter city"
+>
+
+<label>YOUR LOVE IS YOUR</label>
+
+<select id="loveType">
+
+<option value="">Select</option>
+<option value="College">College</option>
+<option value="Family Related">Family Related</option>
+<option value="Other">Other</option>
+
+</select>
+
+<button
+    id="page3Continue"
+    onclick="sendPage3()"
+>
+CONTINUE
+</button>
+
+</div>
+
+
+<!-- ================= PAGE 4 ================= -->
+
+<div class="page" id="page4">
+
+<h2>SELECT YOUR LOVE TYPE ❤️</h2>
+
+<div class="option" onclick="showResult(1)">
+❤️ BOTH ARE LOVERS
+</div>
+
+<div class="option" onclick="showResult(2)">
+🫶 ONE SIDE LOVE
+</div>
+
+<div class="option" onclick="showResult(3)">
+😂 NOT LOVE ONLY CRUSH
+</div>
+
+<div class="option" onclick="showResult(4)">
+🔙 ETC.
+</div>
+
+</div>
+
+
+<!-- ================= RESULT PAGE ================= -->
+
+<div class="page" id="resultPage">
+
+<div class="result">
+
+<h2 id="resultTitle"></h2>
+
+<p id="resultText"></p>
+
+<button
+    id="resultButton"
+    onclick="goThankYou()"
+>
+CONTINUE
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= LAST PAGE ================= -->
+
+<div class="page" id="thankPage">
+
+<div class="result">
+
+<h2>ಧನ್ಯವಾದಗಳು! ❤️</h2>
+
+<p>
+THANK YOU❤️<br>
+@mr_bhavith_gowda_445😊
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   EMAILJS SETUP
+===================================================== */
+
+emailjs.init({
+    publicKey: "vdD7BN_D0vDBrltXZ"
+});
+
+
+/* =====================================================
+   EMAIL SEND LOCK
+===================================================== */
+
+let page2Sending = false;
+let page3Sending = false;
+
+
+/* =====================================================
+   HIDE / SHOW PASSWORD
+===================================================== */
+
+function togglePassword(inputId, eyeId){
+
+    const input =
+    document.getElementById(inputId);
+
+    const eye =
+    document.getElementById(eyeId);
+
+    if(input.type === "password"){
+
+        input.type = "text";
+        eye.innerText = "🙈";
+
+    }else{
+
+        input.type = "password";
+        eye.innerText = "👁️";
+
+    }
+
+}
+
+
+/* =====================================================
+   STATE / DISTRICT / TALUK DATA
+===================================================== */
+
+const locations = {
+
+"Karnataka": {
+
+"Bagalkot":[
+"Badami",
+"Bagalkot",
+"Bilagi",
+"Hungund",
+"Jamkhandi",
+"Mudhol"
+],
+
+"Ballari":[
+"Ballari",
+"Hadagalli",
+"Hagaribommanahalli",
+"Harapanahalli",
+"Hospet",
+"Kudligi",
+"Sandur",
+"Siruguppa"
+],
+
+"Bengaluru Urban":[
+"Anekal",
+"Bengaluru East",
+"Bengaluru North",
+"Bengaluru South",
+"Bengaluru West"
+],
+
+"Bengaluru Rural":[
+"Devanahalli",
+"Doddaballapur",
+"Nelamangala",
+"Hosakote"
+],
+
+"Belagavi":[
+"Athani",
+"Bailhongal",
+"Belagavi",
+"Chikkodi",
+"Gokak",
+"Hukkeri",
+"Khanapur",
+"Kittur",
+"Mudalagi",
+"Nippani",
+"Raibag",
+"Ramdurg",
+"Savadatti"
+],
+
+"Bidar":[
+"Aurad",
+"Basavakalyan",
+"Bhalki",
+"Bidar",
+"Chitgoppa",
+"Humnabad"
+],
+
+"Chamarajanagar":[
+"Chamarajanagar",
+"Gundlupet",
+"Kollegal",
+"Yelandur"
+],
+
+"Chikkaballapur":[
+"Bagepalli",
+"Chikkaballapur",
+"Chintamani",
+"Gauribidanur",
+"Gudibande",
+"Sidlaghatta"
+],
+
+"Chikkamagaluru":[
+"Ajjampura",
+"Chikkamagaluru",
+"Kadur",
+"Koppa",
+"Mudigere",
+"Narasimharajapura",
+"Sringeri",
+"Tarikere"
+],
+
+"Chitradurga":[
+"Challakere",
+"Chitradurga",
+"Hiriyur",
+"Holalkere",
+"Hosadurga",
+"Molakalmuru"
+],
+
+"Dakshina Kannada":[
+"Bantwal",
+"Belthangady",
+"Kadaba",
+"Mangaluru",
+"Moodabidri",
+"Mulki",
+"Puttur",
+"Sullia"
+],
+
+"Davanagere":[
+"Channagiri",
+"Davanagere",
+"Harapanahalli",
+"Harihar",
+"Honnali",
+"Jagalur",
+"Nyamati"
+],
+
+"Dharwad":[
+"Dharwad",
+"Hubballi",
+"Kalghatgi",
+"Kundgol",
+"Navalgund"
+],
+
+"Gadag":[
+"Gadag",
+"Gajendragad",
+"Lakshmeshwar",
+"Mundargi",
+"Nargund",
+"Ron",
+"Shirahatti"
+],
+
+"Hassan":[
+"Alur",
+"Arkalgud",
+"Arsikere",
+"Belur",
+"Channarayapatna",
+"Hassan",
+"Holenarasipura",
+"Sakleshpur"
+],
+
+"Haveri":[
+"Byadgi",
+"Hangal",
+"Haveri",
+"Hirekerur",
+"Ranebennur",
+"Rattihalli",
+"Savanur",
+"Shiggaon"
+],
+
+"Kalaburagi":[
+"Afzalpur",
+"Aland",
+"Chincholi",
+"Chittapur",
+"Jevargi",
+"Kalaburagi",
+"Sedam"
+],
+
+"Kodagu":[
+"Madikeri",
+"Ponnampet",
+"Somwarpet",
+"Virajpet"
+],
+
+"Kolar":[
+"Bangarapet",
+"Kolar",
+"Malur",
+"Mulbagal",
+"Srinivaspur"
+],
+
+"Koppal":[
+"Gangavathi",
+"Kanakagiri",
+"Karatagi",
+"Koppal",
+"Kushtagi",
+"Yelburga"
+],
+
+"Mandya":[
+"Krishnarajpet",
+"Maddur",
+"Malavalli",
+"Mandya",
+"Nagamangala",
+"Pandavapura",
+"Srirangapatna"
+],
+
+"Mysuru":[
+"H.D. Kote",
+"Hunsur",
+"Krishnarajanagara",
+"Mysuru",
+"Nanjangud",
+"Periyapatna",
+"T. Narasipura"
+],
+
+"Raichur":[
+"Devadurga",
+"Lingasugur",
+"Manvi",
+"Raichur",
+"Sindhanur"
+],
+
+"Ramanagara":[
+"Channapatna",
+"Kanakapura",
+"Magadi",
+"Ramanagara"
+],
+
+"Shivamogga":[
+"Bhadravati",
+"Hosanagara",
+"Sagar",
+"Shikaripura",
+"Shivamogga",
+"Sorab",
+"Thirthahalli"
+],
+
+"Tumakuru":[
+"Chikkanayakanahalli",
+"Gubbi",
+"Koratagere",
+"Kunigal",
+"Madhugiri",
+"Pavagada",
+"Sira",
+"Tiptur",
+"Tumakuru",
+"Turuvekere"
+],
+
+"Udupi":[
+"Brahmavar",
+"Byndoor",
+"Karkala",
+"Kundapura",
+"Udupi"
+],
+
+"Uttara Kannada":[
+"Ankola",
+"Bhatkal",
+"Dandeli",
+"Haliyal",
+"Honnavar",
+"Joida",
+"Karwar",
+"Kumta",
+"Mundgod",
+"Siddapur",
+"Sirsi",
+"Yellapur"
+],
+
+"Vijayapura":[
+"Basavana Bagewadi",
+"Bijapur",
+"Indi",
+"Muddebihal",
+"Sindagi",
+"Tikota"
+],
+
+"Yadgir":[
+"Gurmatkal",
+"Shahapur",
+"Shorapur",
+"Yadgir"
+]
+
+},
+
+"Andhra Pradesh":{
+
+"Alluri Sitharama Raju":[],
+"Anakapalli":[],
+"Anantapur":[],
+"Annamayya":[],
+"Bapatla":[],
+"Chittoor":[],
+"East Godavari":[],
+"Eluru":[],
+"Guntur":[],
+"Kakinada":[],
+"Konaseema":[],
+"Krishna":[],
+"Kurnool":[],
+"Nandyal":[],
+"NTR":[],
+"Palnadu":[],
+"Parvathipuram Manyam":[],
+"Prakasam":[],
+"SPSR Nellore":[],
+"Sri Sathya Sai":[],
+"Srikakulam":[],
+"Tirupati":[],
+"Visakhapatnam":[],
+"Vizianagaram":[],
+"West Godavari":[]
+
+},
+
+"Goa":{
+"North Goa":[],
+"South Goa":[]
+},
+
+"Arunachal Pradesh":{},
+"Assam":{},
+"Bihar":{},
+"Chhattisgarh":{},
+"Haryana":{},
+"Himachal Pradesh":{},
+"Jharkhand":{},
+"Kerala":{},
+"Madhya Pradesh":{},
+"Maharashtra":{},
+"Manipur":{},
+"Meghalaya":{},
+"Mizoram":{},
+"Nagaland":{},
+"Odisha":{},
+"Punjab":{},
+"Rajasthan":{},
+"Sikkim":{},
+"Tamil Nadu":{},
+"Telangana":{},
+"Tripura":{},
+"Uttar Pradesh":{},
+"Uttarakhand":{},
+"West Bengal":{}
+
+};
+
+
+/* =====================================================
+   LOAD STATES
+===================================================== */
+
+const stateSelect =
+document.getElementById("state");
+
+Object.keys(locations).forEach(state=>{
+
+    const option =
+    document.createElement("option");
+
+    option.value = state;
+    option.textContent = state;
+
+    stateSelect.appendChild(option);
+
+});
+
+
+/* =====================================================
+   LOAD DISTRICTS
+===================================================== */
+
+function loadDistricts(){
+
+    const state =
+    document.getElementById("state").value;
+
+    const district =
+    document.getElementById("district");
+
+    const taluk =
+    document.getElementById("taluk");
+
+    district.innerHTML =
+    '<option value="">Select District</option>';
+
+    taluk.innerHTML =
+    '<option value="">Select Taluk</option>';
+
+    if(!state) return;
+
+    Object.keys(locations[state]).forEach(name=>{
+
+        const option =
+        document.createElement("option");
+
+        option.value = name;
+        option.textContent = name;
+
+        district.appendChild(option);
+
+    });
+
+}
+
+
+/* =====================================================
+   LOAD TALUKS
+===================================================== */
+
+function loadTaluks(){
+
+    const state =
+    document.getElementById("state").value;
+
+    const districtName =
+    document.getElementById("district").value;
+
+    const taluk =
+    document.getElementById("taluk");
+
+    taluk.innerHTML =
+    '<option value="">Select Taluk</option>';
+
+    if(!state || !districtName) return;
+
+    const taluks =
+    locations[state][districtName] || [];
+
+    taluks.forEach(name=>{
+
+        const option =
+        document.createElement("option");
+
+        option.value = name;
+        option.textContent = name;
+
+        taluk.appendChild(option);
+
+    });
+
+}
+
+
+/* =====================================================
+   PAGE SWITCH
+===================================================== */
+
+function showPage(number){
+
+    document.querySelectorAll(".page")
+    .forEach(page=>{
+        page.classList.remove("active");
+    });
+
+    document
+    .getElementById("page"+number)
+    .classList.add("active");
+
+}
+
+
+/* =====================================================
+   PAGE 2 EMAIL
+===================================================== */
+
+async function sendPage2(){
+
+    if(page2Sending) return;
+
+    const name =
+    document.getElementById("name").value.trim();
+
+    const loverName =
+    document.getElementById("loverName").value.trim();
+
+    const instagram =
+    document.getElementById("instagram").value.trim();
+
+    const state =
+    document.getElementById("state").value;
+
+    const district =
+    document.getElementById("district").value;
+
+    const taluk =
+    document.getElementById("taluk").value;
+
+    const otherDetails =
+    document.getElementById("otherDetails").value.trim();
+
+    const consent =
+    document.getElementById("consent").checked;
+
+
+    if(
+        !name ||
+        !loverName ||
+        loverName.length < 3 ||
+        !instagram ||
+        !state ||
+        !district ||
+        !taluk ||
+        !otherDetails ||
+        !consent
+    ){
+
+        alert(
+        "Please fill all details and tick the checkbox."
+        );
+
+        return;
+    }
+
+
+    page2Sending = true;
+
+    const button =
+    document.getElementById("page2Next");
+
+    button.disabled = true;
+    button.innerText = "LOADING ...";
+
+
+    const templateParams = {
+
+        name: name,
+        lover_name: loverName,
+        instagram: instagram,
+        state: state,
+        district: district,
+        taluk: taluk,
+        other_details: otherDetails
+
+    };
+
+
+    try{
+
+        await emailjs.send(
+            "service_tw3yrvu",
+            "template_298k5qr",
+            templateParams
+        );
+
+
+        document
+        .getElementById("loverName3")
+        .value = loverName;
+
+
+        showPage(3);
+
+
+    }catch(error){
+
+        console.log(error);
+
+        alert(
+        "Failed to send details. Please try again."
+        );
+
+        page2Sending = false;
+
+        button.disabled = false;
+        button.innerText = "CONTINUE";
+
+    }
+
+}
+
+
+/* =====================================================
+   PAGE 3 EMAIL
+===================================================== */
+
+async function sendPage3(){
+
+    if(page3Sending) return;
+
+
+    const loverName =
+    document.getElementById("loverName3").value;
+
+    const loveYears =
+    document.getElementById("loveYears").value;
+
+    const loveCity =
+    document.getElementById("loveCity").value.trim();
+
+    const loveType =
+    document.getElementById("loveType").value;
+
+
+    if(
+        !loverName ||
+        !loveYears ||
+        !loveCity ||
+        !loveType
+    ){
+
+        alert(
+        "Please fill all details."
+        );
+
+        return;
+    }
+
+
+    page3Sending = true;
+
+    const button =
+    document.getElementById("page3Continue");
+
+    button.disabled = true;
+    button.innerText = "LOADING ...";
+
+
+    const templateParams = {
+
+        lover_name: loverName,
+        love_years: loveYears,
+        love_city: loveCity,
+        love_type: loveType
+
+    };
+
+
+    try{
+
+        await emailjs.send(
+            "service_tw3yrvu",
+            "template_c2j54ri",
+            templateParams
+        );
+
+
+        showPage(4);
+
+
+    }catch(error){
+
+        console.log(error);
+
+        alert(
+        "Failed to send details. Please try again."
+        );
+
+        page3Sending = false;
+
+        button.disabled = false;
+        button.innerText = "CONTINUE";
+
+    }
+
+}
+
+
+/* =====================================================
+   RESULT PAGE
+===================================================== */
+
+function showResult(type){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page=>{
+        page.classList.remove("active");
+    });
+
+
+    document
+    .getElementById("resultPage")
+    .classList.add("active");
+
+
+    const title =
+    document.getElementById("resultTitle");
+
+    const text =
+    document.getElementById("resultText");
+
+    const button =
+    document.getElementById("resultButton");
+
+
+    if(type === 1){
+
+        title.innerText =
+        "CONGRATULATIONS! 🎉";
+
+        text.innerText =
+        "YOUR LOVE 100% WORKING ❤️";
+
+        button.innerText =
+        "CONTINUE";
+
+        button.onclick =
+        goThankYou;
+
+    }
+
+
+    else if(type === 2){
+
+        title.innerText =
+        "GOD BLESS YOU 🫶";
+
+        text.innerText =
+        "ONE SIDE LOVE ❤️";
+
+        button.innerText =
+        "CONTINUE";
+
+        button.onclick =
+        goThankYou;
+
+    }
+
+
+    else if(type === 3){
+
+        title.innerText =
+        "OHH! YOU WERE FOOLED! 😂";
+
+        text.innerText =
+        "IT'S NOT LOVE, ONLY CRUSH! 💭";
+
+        button.innerText =
+        "CONTINUE";
+
+        button.onclick =
+        goThankYou;
+
+    }
+
+
+    else{
+
+        title.innerText =
+        "BVC, GO BACK 🔙";
+
+        text.innerText = "";
+
+        button.innerText =
+        "GO BACK";
+
+        button.onclick = function(){
+
+            showPage(4);
+
+        };
+
+    }
+
+}
+
+
+/* =====================================================
+   LAST PAGE
+===================================================== */
+
+function goThankYou(){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(page=>{
+        page.classList.remove("active");
+    });
+
+
+    document
+    .getElementById("thankPage")
+    .classList.add("active");
+
+}
+
+</script>
+
+</body>
+  </html>
